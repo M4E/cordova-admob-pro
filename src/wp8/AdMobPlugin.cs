@@ -70,8 +70,8 @@ namespace Cordova.Extension.Commands
 		public const string OPT_BANNER_ID = "bannerId";
 		public const string OPT_INTERSTITIAL_ID = "interstitialId";
 		
-		private const string TEST_BANNER_ID = "ca-app-pub-6869992474017983/9375997553";
-		private const string TEST_INTERSTITIAL_ID = "ca-app-pub-6869992474017983/1355127956";
+		private const string TEST_BANNER_ID = "ca-app-pub-9330152050131267/5753394415";
+		private const string TEST_INTERSTITIAL_ID = "ca-app-pub-9330152050131267/7230127612";
 		
 		// banner positions 
 		public const int NO_CHANGE = 0;
@@ -91,7 +91,7 @@ namespace Cordova.Extension.Commands
         #region Members
 
 		private bool isTesting = false;
-		private bool logVerbose = false;
+		private bool logVerbose = true;
 		
 		private string bannerId = "";
 		private string interstitialId = "";
@@ -209,7 +209,7 @@ namespace Cordova.Extension.Commands
                 bannerAd = null;
             });
 
-            DispatchCommandResult(new PluginResult(PluginResult.Status.OK));
+            //DispatchCommandResult(new PluginResult(PluginResult.Status.OK));
         }
 
 		public void showBanner(string args) {
@@ -361,7 +361,8 @@ namespace Cordova.Extension.Commands
 		private void __createBanner(string adId, bool autoShow) {
 			if (bannerAd != null) {
 				if(logVerbose) Debug.WriteLine("banner already created.");
-				return;
+                removeBanner("from create");
+                //return;
 			}
 
 			if (isTesting)
@@ -511,7 +512,7 @@ namespace Cordova.Extension.Commands
 					grid.RowDefinitions.Remove(row);
 					row = null;
 	
-					bannerAd.Visibility = Visibility.Collapsed;
+					//bannerAd.Visibility = Visibility.Collapsed;
 					bannerVisible = false;
 	
 					if(! overlap) {
